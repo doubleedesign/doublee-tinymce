@@ -1,0 +1,23 @@
+{
+	"name": "doublee-tinymce",
+	"version": "0.0.1",
+	"author": "Double-E Design",
+	"homepage": "https://github.com/doubleedesign/doublee-tinymce",
+	"scripts": {
+		"compile": "rollup -c",
+		"lint": "eslint --fix",
+		"build": "npm run compile"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/doubleedesign/doublee-tinymce.git"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.17.0",
+		"@stylistic/eslint-plugin-js": "^2.12.1",
+		"@types/tinymce": "^4.6.9",
+		"eslint": "^9.24.0",
+		"glob": "^13.0.0",
+		"rollup": "^4.53.3"
+	}
+}

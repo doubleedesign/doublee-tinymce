@@ -1,0 +1,22 @@
+.mce-toolbar-grp {
+	> .mce-stack-layout {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.mce-toolbar {
+		display: inline-flex;
+
+		&:has(+ .mce-toolbar + .mce-toolbar) { // if there is only two, they split the space, otherwise the top row should be 100%
+			&:first-child {
+				display: flex;
+				width: 100%;
+				flex-basis: 100%;
+			}
+		}
+
+		&:has(.mce-btn[aria-label^="Undo"]):not(:only-child) {
+			margin-inline-start: auto;
+		}
+	}
+}

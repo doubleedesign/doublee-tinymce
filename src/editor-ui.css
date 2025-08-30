@@ -1,0 +1,17 @@
+.mce-toolbar-grp > .mce-stack-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+.mce-toolbar-grp .mce-toolbar {
+  display: inline-flex;
+}
+.mce-toolbar-grp .mce-toolbar:has(+ .mce-toolbar + .mce-toolbar):first-child {
+  display: flex;
+  width: 100%;
+  flex-basis: 100%;
+}
+.mce-toolbar-grp .mce-toolbar:has(.mce-btn[aria-label^=Undo]):not(:only-child) {
+  margin-inline-start: auto;
+}
+
+/*# sourceMappingURL=editor-ui.css.map */
