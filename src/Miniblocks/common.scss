@@ -29,19 +29,21 @@ $swatchSize: 1.75rem;
 		border: 1px solid transparent;
 	}
 
-	&.mce-active,
-	&:hover,
-	&:focus {
-		background: transparent !important;
-		border-color: #1d1f21 !important;
-	}
+	&[role="menuitem"] {
+		&.mce-active,
+		&:hover,
+		&:focus {
+			background: transparent !important;
+			border-color: #1d1f21 !important;
+		}
 
-	&.mce-active {
-		&:after {
-			content: '\f00c';
-			font-family: var(--fa-style-family-classic);
-			font-size: 1rem;
-			font-weight: 700;
+		&.mce-active {
+			&:after {
+				content: '\f00c';
+				font-family: var(--fa-style-family-classic);
+				font-size: 1rem;
+				font-weight: 700;
+			}
 		}
 	}
 }
@@ -49,22 +51,199 @@ $swatchSize: 1.75rem;
 .mce-window.mce-container:not([aria-label="Keyboard Shortcuts"]) {
 	width: 600px;
 	left: calc(50dvw - 300px) !important;
+}
 
-	&:has(#button-group-form-container) {
-		width: 700px !important;
+.mce-doublee-miniblock-modal {
+	height: fit-content !important;
+	min-width: 700px !important;
+
+	.mce-window-head,
+	.mce-window-body,
+	.mce-foot {
+		box-sizing: border-box !important;
+		position: relative;
+		padding-inline: 1rem !important;
+		border: 0 !important;
+	}
+
+	.mce-window-head {
+		padding-block: 0.5rem !important;
+
+		.mce-title {
+			padding-inline-start: 0 !important;
+		}
+	}
+
+	.mce-window-body {
+		width: 100% !important;
+		height: auto !important;
+
+		> .mce-container > .mce-container-body {
+			width: 100% !important;
+			height: auto !important;
+		}
+	}
+
+	.mce-foot {
+		padding: 1rem;
+
+		.mce-container-body {
+			width: 100% !important;
+			height: auto !important;
+			display: flex;
+			gap: 0.25rem;
+			justify-content: flex-end;
+		}
+	}
+
+	.mce-abs-layout-item {
+		position: relative !important;
+		left: unset !important;
+		top: unset !important;
+	}
+
+	.mce-abs-end {
+		display: none;
+	}
+
+	.mce-formitem {
+		padding-block: 0.25rem;
+
+		> .mce-container-body {
+			align-items: center;
+			height: fit-content !important;
+			position: relative !important;
+			display: grid;
+			grid-gap: 0.25rem;
+			grid-template-columns: repeat(9, 1fr);
+
+			.mce-label {
+				position: relative !important;
+				width: auto !important;
+				height: auto !important;
+				grid-column: span 2;
+				text-wrap: wrap;
+				line-height: 1.2 !important;
+			}
+
+			> textarea,
+			> input,
+			> .mce-listbox,
+			> .mce-container {
+				grid-column: span 7;
+				border-radius: 0.25rem;
+			}
+
+			> textarea,
+			> input {
+				padding: 0.5rem;
+				box-sizing: border-box;
+				width: 100% !important;
+			}
+
+			> input {
+				height: auto !important;
+			}
+
+			> .mce-container {
+				width: auto !important;
+
+				> .mce-container-body {
+					width: 100% !important;
+					height: auto !important;
+				}
+			};
+		}
+	}
+
+	.mce-container {
+		position: relative !important;
+		height: fit-content !important;
+	}
+
+	// All custom listboxes in modals - initial menu component
+	.mce-listbox {
+		padding: 0.25rem !important;
+		height: fit-content !important;
+		position: relative !important;
+		width: auto !important;
+		left: unset !important;
+
+		button {
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			box-sizing: border-box !important;
+			padding-block: 0 !important;
+			padding-inline-start: 0 !important;
+			// leave end padding for arrow
+
+			&:has(.mce-doublee-custom-icon) {
+				.mce-ico {
+					display: none;
+				}
+			}
+		}
 	}
 }
 
-.mce-floatpanel [role="menu"]:has(.mce-color-theme-field__swatch) {
+
+// Custom icons added in TinyMCE modals by our JS code
+.mce-doublee-custom-icon {
 	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-	height: $swatchSize;
-	padding: 0.25rem;
+	justify-content: center;
+	align-items: center;
+	width: 3rem !important;
+	height: 2rem;
+	border-radius: 2px;
+	box-sizing: border-box;
+
+	svg {
+		display: block;
+		height: 2rem;
+		padding: 0;
+
+		path {
+			transition: all 0.2s ease-in-out;
+			fill: rgb(117, 117, 117);
+		}
+	}
+
+	@at-root .mce-menu-item:has(&) {
+		display: flex;
+		justify-content: center;
+		border-radius: 2px;
+		width: fit-content !important;
+		padding: 2px;
+		margin: 0;
+		transition: all 0.2s ease-in-out;
+		position: relative;
+		font-size: 0; // hide empty whitespace that affects width
+		.mce-ico {
+			display: none;
+		}
+
+		&.mce-active {
+			background: transparent !important;
+		}
+	}
+
+	.mce-menu-item.mce-active &,
+	.mce-btn & {
+		background: rgb(30, 30, 30);
+
+		svg {
+			path {
+				fill: white;
+			}
+		}
+	}
 }
 
+// Custom colour theme field in TinyMCE modals
 .mce-color-theme-field {
-	height: 2.5rem !important;
+	display: flex !important;
+	align-items: center;
 
 	&__swatch {
 		@include swatch-base();
@@ -104,143 +283,67 @@ $swatchSize: 1.75rem;
 		.mce-text {
 			font-size: 0;
 		}
-	}
 
-	> button {
-		@include swatch-base();
-		height: 100%;
-		display: flex !important;
-		width: 100% !important;
-		justify-content: unset !important;
-	}
-}
-
-// Custom icons added in TinyMCE modals by our JS code
-.mce-doublee-custom-icon {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 3rem !important;
-	height: 2rem;
-	border-radius: 2px;
-	box-sizing: border-box;
-
-	svg {
-		display: block;
-		height: 2rem;
-		padding: 0;
-
-		path {
-			transition: all 0.2s ease-in-out;
-			fill: rgb(117, 117, 117);
-		}
-	}
-
-	@at-root .mce-menu-item:has(&) {
-		display: flex;
-		justify-content: center;
-		border-radius: 2px;
-		width: fit-content !important;
-		padding: 2px;
-		margin: 0;
-		transition: all 0.2s ease-in-out;
-		position: relative;
-		font-size: 0; // hide empty whitespace that affects width
-
-		.mce-ico {
-			display: none;
+		@at-root [role="menu"]:has(&) {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			height: $swatchSize;
+			padding: 0.25rem;
 		}
 
-		&.mce-active {
-			background: transparent !important;
-		}
-	}
-
-	.mce-menu-item.mce-active &,
-	.mce-btn & {
-		background: rgb(30, 30, 30);
-
-		svg {
-			path {
-				fill: white;
-			}
-		}
-	}
-}
-
-// Custom listboxes in modals - initial menu component
-.mce-listbox {
-	min-height: 40px;
-
-	button {
-		display: flex;
-		align-items: center;
-		gap: 0.25rem;
-
-		&:has(.mce-doublee-custom-icon) {
-			.mce-ico {
-				display: none;
-			}
+		.mce-btn & {
+			width: 3.5rem !important; // for alignment with halign field elements
 		}
 	}
 }
 
 // Custom listboxes in modals with icons - dropdown menu
-.mce-menu-has-icons:has(.mce-halign-field__option) {
-	padding: 0;
-	margin: 0;
-	overflow: visible; // for the tooltips
+.mce-menu-has-icons {
+	body:has(.mce-doublee-miniblock-modal) & {
+		padding: 0;
+		margin: 0;
+		overflow: visible; // for the tooltips
 
-	[role="menu"] {
-		display: flex;
-		flex-direction: row;
-		gap: 2px;
-		border: 1px solid #CCC;
-		padding: 2px;
-		width: fit-content;
+		[role="menu"] {
+			display: flex;
+			flex-direction: row;
+			gap: 2px;
+			border: 1px solid #CCC;
+			padding: 2px;
+			width: fit-content;
 
-		.mce-menu-item {
-			.mce-text {
-				display: block;
-				font-size: 0.75rem;
-				position: absolute;
-				z-index: 10;
-				background: rgb(30, 30, 30);
-				color: white;
-				padding: 0.25rem;
-				opacity: 0;
-				top: 100%;
-				left: 50%;
-				transform: translateX(-50%);
-				transition: opacity 0.2s ease;
-			}
-
-			&:hover, &:focus, &:active {
-				background: #EEE;
-
+			.mce-menu-item {
 				.mce-text {
-					opacity: 1;
+					display: block;
+					font-size: 0.75rem;
+					position: absolute;
+					z-index: 10;
+					background: rgb(30, 30, 30);
+					color: white;
+					padding: 0.25rem;
+					opacity: 0;
+					top: 100%;
+					left: 50%;
+					transform: translateX(-50%);
+					transition: opacity 0.2s ease;
+				}
+
+				&:hover, &:focus, &:active {
+					background: #EEE;
+
+					.mce-text {
+						opacity: 1;
+					}
 				}
 			}
 		}
 	}
 }
 
-.mce-container-body:has(#button-group-form-container) {
-	background: white;
-	min-height: 300px !important;
-	width: auto !important;
-	display: flex !important;
-	flex-direction: column;
-
-	> .mce-label {
-		position: relative !important;
-		display: block;
-		top: unset !important;
-	}
-}
-
 #button-group-form-container {
+	padding-bottom: 0.75rem;
+
 	> .acf-fields {
 		p {
 			text-wrap: wrap;
@@ -257,6 +360,34 @@ $swatchSize: 1.75rem;
 
 		.acf-table {
 			border: 1px solid #CCC;
+		}
+	}
+
+	.acf-field-link {
+
+		.acf-link.-value {
+			max-width: 320px !important;
+
+			.link-wrap {
+				width: 100%;
+				box-sizing: border-box;
+				display: flex;
+				flex-wrap: wrap;
+
+				.link-title {
+					padding-left: 0;
+				}
+
+				.link-url {
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+
+				.acf-icon[title="Edit"] {
+					margin-left: auto;
+				}
+			}
 		}
 	}
 }

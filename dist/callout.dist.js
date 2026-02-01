@@ -160,7 +160,9 @@
 		}
 
 		openModal(editor, existingData, existingNode) {
+			const plugin = this;
 			const defaults = doublee_tinymce?.defaults?.['callout'] || {};
+
 			const data = {
 				content: existingData?.content ?? defaults?.content ?? '',
 				colorTheme: existingData?.colorTheme ?? defaults?.colorTheme ?? ''
@@ -168,6 +170,7 @@
 
 			editor.windowManager.open({
 				title: existingNode ? 'Edit callout' : 'Insert callout',
+				classes: 'doublee-miniblock-modal',
 				body: [
 					{
 						type: 'textbox',
@@ -201,7 +204,7 @@
 						editor.insertContent(calloutHtml);
 					}
 				}
-			});
+			}, {});
 		}
 	}
 

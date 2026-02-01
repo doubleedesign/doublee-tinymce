@@ -52,7 +52,6 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 
 	openModal(editor, existingData = {}, existingNode = null) {
 		const plugin = this;
-
 		const defaults = doublee_tinymce?.defaults?.['button-group'] || {};
 
 		const data = {
@@ -69,6 +68,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 
 			editor.windowManager.open({
 				title: existingNode ? 'Edit Button Group' : 'Insert Button Group',
+				classes: 'doublee-miniblock-modal',
 				body: [
 					{
 						type: 'container',

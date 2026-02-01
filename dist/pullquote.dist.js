@@ -161,6 +161,7 @@
 		}
 
 		openModal(editor, existingData, existingNode) {
+			const plugin = this;
 			const defaults = doublee_tinymce?.defaults?.['pullquote'] || {};
 
 			const data = {
@@ -171,6 +172,7 @@
 
 			editor.windowManager.open({
 				title: existingNode ? 'Edit pullquote' : 'Insert pullquote',
+				classes: 'doublee-miniblock-modal',
 				body: [
 					{
 						type: 'textbox',
