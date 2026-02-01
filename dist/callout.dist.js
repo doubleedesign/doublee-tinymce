@@ -1,6 +1,8 @@
 (function () {
 	'use strict';
 
+	/* global doublee_tinymce */
+
 	class MiniblockPlugin {
 		constructor() {
 			if (this.constructor === MiniblockPlugin) {
@@ -112,6 +114,8 @@
 		}
 	}
 
+	/* global doublee_tinymce */
+
 	/** @type {{ PluginManager: import('tinymce').AddOnManager }} */
 	const tinymce = window.tinymce;
 
@@ -156,7 +160,11 @@
 		}
 
 		openModal(editor, existingData, existingNode) {
-			const data = existingData || { content: '', colorTheme: '' };
+			const defaults = doublee_tinymce?.defaults?.['callout'] || {};
+			const data = {
+				content: existingData?.content ?? defaults?.content ?? '',
+				colorTheme: existingData?.colorTheme ?? defaults?.colorTheme ?? ''
+			};
 
 			editor.windowManager.open({
 				title: existingNode ? 'Edit callout' : 'Insert callout',

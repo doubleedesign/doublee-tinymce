@@ -1,3 +1,4 @@
+/* global doublee_tinymce */
 import { MiniblockPlugin } from '../_miniblock-plugin.js';
 
 /** @type {{ PluginManager: import('tinymce').AddOnManager }} */
@@ -45,7 +46,13 @@ class PullquotePlugin extends MiniblockPlugin {
 	}
 
 	openModal(editor, existingData, existingNode) {
-		const data = existingData || { quote: '', citation: '', colorTheme: '' };
+		const defaults = doublee_tinymce?.defaults?.['pullquote'] || {};
+
+		const data = {
+			quote: existingData?.quote ?? defaults?.quote ?? '',
+			citation: existingData?.citation ?? defaults?.citation ?? '',
+			colorTheme: existingData?.colorTheme ?? defaults?.colorTheme ?? ''
+		}
 
 		editor.windowManager.open({
 			title: existingNode ? 'Edit pullquote' : 'Insert pullquote',

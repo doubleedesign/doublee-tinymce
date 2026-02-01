@@ -1,3 +1,5 @@
+/* global doublee_tinymce */
+
 export class MiniblockPlugin {
 	constructor() {
 		if (this.constructor === MiniblockPlugin) {

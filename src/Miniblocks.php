@@ -25,6 +25,7 @@ class Miniblocks {
                 'ajaxUrl'          => admin_url('admin-ajax.php'),
                 'nonce'            => wp_create_nonce('doublee_tinymce_ajax_nonce'),
                 'palette'          => apply_filters('doublee_tinymce_theme_colours', []),
+				'defaults'         => apply_filters('doublee_tinymce_miniblock_defaults', []),
                 'context'          => [
                     // TODO: Handle taxonomy term types here too
                     'object_type' => get_post_type(),

@@ -1,3 +1,4 @@
+/* global doublee_tinymce */
 import { MiniblockPlugin } from '../_miniblock-plugin';
 
 /** @type {{ PluginManager: import('tinymce').AddOnManager }} */
@@ -44,7 +45,11 @@ class CalloutPlugin extends MiniblockPlugin {
 	}
 
 	openModal(editor, existingData, existingNode) {
-		const data = existingData || { content: '', colorTheme: '' };
+		const defaults = doublee_tinymce?.defaults?.['callout'] || {};
+		const data = {
+			content: existingData?.content ?? defaults?.content ?? '',
+			colorTheme: existingData?.colorTheme ?? defaults?.colorTheme ?? ''
+		}
 
 		editor.windowManager.open({
 			title: existingNode ? 'Edit callout' : 'Insert callout',

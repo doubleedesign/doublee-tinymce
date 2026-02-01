@@ -1,6 +1,8 @@
 (function (exports) {
 	'use strict';
 
+	/* global doublee_tinymce */
+
 	class MiniblockPlugin {
 		constructor() {
 			if (this.constructor === MiniblockPlugin) {

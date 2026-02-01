@@ -1,4 +1,5 @@
 /* global acf */
+/* global doublee_tinymce */
 import { MiniblockPlugin } from '../_miniblock-plugin';
 
 /** @type {{ PluginManager: import('tinymce').AddOnManager }} */
@@ -50,9 +51,15 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 	}
 
 	openModal(editor, existingData = {}, existingNode = null) {
-
 		const plugin = this;
-		const data = existingData || { links: [], colorTheme: '', hAlign: '' };
+
+		const defaults = doublee_tinymce?.defaults?.['button-group'] || {};
+
+		const data = {
+			links: existingData?.links ?? [],
+			colorTheme:  existingData?.colorTheme ?? defaults?.colorTheme ?? '',
+			hAlign: existingData?.hAlign ?? defaults?.hAlign ?? 'start'
+		};
 
 		this.getRepeaterFieldHtml().then((response) => {
 			if (!response.success || !response?.data?.form_html || !response?.data?.acf_button_group_repeater_key) {

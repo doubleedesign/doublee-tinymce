@@ -80,11 +80,12 @@ This plugin performs some filtering on the `mce_buttons_*` hooks to customise th
 
 Plugins and themes can further customise TinyMCE when using this plugin by using the following filters:
 
-| Filter                                  | Parameters       | Usage                                                                                                            |
-|-----------------------------------------|------------------|------------------------------------------------------------------------------------------------------------------|
-| `doublee_tinymce_theme_colours`         | array `$colours` | Set the colour palette for miniblocks that have theme colour pickers, in key (name) and value (hex code) format. |
-| `doublee_tinymce_styleselect_formats`   | array `$formats` | Modify the styles/formats available in the text format dropdown.                                                 |
-| `doublee_tinymce_always_remove_buttons` | array `$buttons` | Modify which buttons are always removed from the toolbars.                                                       |
+| Filter                                  | Parameters        | Usage                                                                                                            |
+|-----------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------|
+| `doublee_tinymce_theme_colours`         | array `$colours`  | Set the colour palette for miniblocks that have theme colour pickers, in key (name) and value (hex code) format. |
+| `doublee_tinymce_styleselect_formats`   | array `$formats`  | Modify the styles/formats available in the text format dropdown.                                                 |
+| `doublee_tinymce_always_remove_buttons` | array `$buttons`  | Modify which buttons are always removed from the toolbars.                                                       |
+| `doublee_tinymce_miniblock_defaults`    | array `$defaults` | Modify the default values for miniblock fields, such as setting a default alignment for button groups.           |
 
 ### Loading CSS into the editor
 
