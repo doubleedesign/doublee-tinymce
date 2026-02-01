@@ -37,11 +37,21 @@ class Styleselect {
      */
     public function populate_styleselect($settings): array {
         $style_formats = array(
-            array(
-                'title'   => 'Lead paragraph',
-                'block'   => 'p',
-                'classes' => 'is-style-lead'
-            ),
+			array(
+				'title' => 'Paragraph',
+				'items' => array(
+			        array(
+				        'title'   => 'Normal paragraph',
+				        'block'   => 'p',
+				        'classes' => ''
+			        ),
+		            array(
+		                'title'   => 'Lead paragraph',
+		                'block'   => 'p',
+		                'classes' => 'is-style-lead'
+		            )
+				)
+			),
             // Because we remove the standard format selector in favour of this custom one, we need to add standard headings too
             array(
                 'title' => 'Heading',
