@@ -46,6 +46,7 @@ class PullquotePlugin extends MiniblockPlugin {
 	}
 
 	openModal(editor, existingData, existingNode) {
+		const plugin = this;
 		const defaults = doublee_tinymce?.defaults?.['pullquote'] || {};
 
 		const data = {
@@ -56,6 +57,7 @@ class PullquotePlugin extends MiniblockPlugin {
 
 		editor.windowManager.open({
 			title: existingNode ? 'Edit pullquote' : 'Insert pullquote',
+			classes: 'doublee-miniblock-modal',
 			body: [
 				{
 					type: 'textbox',
@@ -74,7 +76,10 @@ class PullquotePlugin extends MiniblockPlugin {
 				},
 				this.createColorThemeSelector(data.colorTheme)
 			],
-			onsubmit: function (e) {
+			onOpen: function (event) {
+				plugin.displayCurrentColorThemeSwatch(event);
+			},
+			onSubmit: function (e) {
 				const citation = e.data.citation ? e.data.citation.trim() : '';
 
 				const html = `

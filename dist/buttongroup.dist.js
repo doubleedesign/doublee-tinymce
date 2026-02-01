@@ -17,6 +17,7 @@
 				label: 'Colour theme',
 				value: selectedValue || '',
 				classes: 'color-theme-field',
+				onClick: this.updateCurrentThemeSwatch.bind(this),
 				values: [
 					{ text: 'Inherit', value: '', classes: 'color-theme-field__swatch color-theme-field__swatch--inherit' },
 					...Object.keys(doublee_tinymce.palette).map(colorName => ({
@@ -26,6 +27,30 @@
 					}))
 				]
 			};
+		}
+
+		displayCurrentColorThemeSwatch(event) {
+			const colorThemeTrigger = event?.target.$el[0].querySelector('.mce-color-theme-field');
+			const colorThemeLabel = event?.target.$el[0].querySelector('.mce-color-theme-field .mce-txt')?.textContent;
+			if(colorThemeTrigger && colorThemeLabel) {
+				colorThemeTrigger.insertAdjacentHTML('afterbegin', `<span class="mce-color-theme-field__swatch mce-color-theme-field__swatch--${colorThemeLabel.toLowerCase()}"></span>`);
+			}
+		}
+
+		updateCurrentThemeSwatch(event) {
+			const colorThemeTrigger = document.querySelector('.mce-color-theme-field');
+			const clickedOption = event?.target?.closest('.mce-menu-item');
+			const clickedOptionLabel = clickedOption?.innerText?.trim();
+			if(colorThemeTrigger && clickedOptionLabel) {
+				// Remove the old swatch
+				const oldSwatch = colorThemeTrigger.querySelector('.mce-color-theme-field__swatch');
+				if(oldSwatch) {
+					oldSwatch.remove();
+				}
+
+				// Insert the new swatch according to the newly-selected option
+				colorThemeTrigger.insertAdjacentHTML('afterbegin', `<span class="mce-color-theme-field__swatch mce-color-theme-field__swatch--${clickedOptionLabel.toLowerCase()}"></span>`);
+			}
 		}
 
 		createHAlignSelector(selectedValue) {
@@ -183,7 +208,7 @@
 
 				editor.windowManager.open({
 					title: existingNode ? 'Edit Button Group' : 'Insert Button Group',
-					classes: 'doublee-miniblock-modal',
+					classes: 'doublee-miniblock-modal doublee-miniblock-modal--button-group',
 					body: [
 						{
 							type: 'container',

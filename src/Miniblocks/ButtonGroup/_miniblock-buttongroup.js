@@ -68,7 +68,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 
 			editor.windowManager.open({
 				title: existingNode ? 'Edit Button Group' : 'Insert Button Group',
-				classes: 'doublee-miniblock-modal',
+				classes: 'doublee-miniblock-modal doublee-miniblock-modal--button-group',
 				body: [
 					{
 						type: 'container',
@@ -79,6 +79,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 					plugin.createHAlignSelector(data.hAlign)
 				],
 				onOpen: function (event) {
+					plugin.displayCurrentColorThemeSwatch(event);
 					plugin.insertCurrentHAlignIcon(event);
 				},
 				onSubmit: function (event) {

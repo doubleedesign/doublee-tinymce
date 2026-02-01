@@ -67,7 +67,10 @@ class CalloutPlugin extends MiniblockPlugin {
 				},
 				this.createColorThemeSelector(data.colorTheme)
 			],
-			onsubmit: function (e) {
+			onOpen: function (event) {
+				plugin.displayCurrentColorThemeSwatch(event);
+			},
+			onSubmit: function (e) {
 				const content = e.data.content.trim();
 				if (content === '') {
 					return;
