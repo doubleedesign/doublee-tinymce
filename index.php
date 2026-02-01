@@ -15,15 +15,6 @@ use Doubleedesign\DoubleeTinymce\PluginEntrypoint;
 
 new PluginEntrypoint();
 
-// Use this for testing in the classic editor without needing to install the plugin
-add_filter('use_block_editor_for_post_type', function($current_status, $post_type) {
-	if (in_array($post_type, ['page'])) {
-		return true;
-	}
-
-	return false;
-}, 10, 2);
-
 function activate_doublee_tinymce(): void {
 	PluginEntrypoint::activate();
 }
