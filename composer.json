@@ -1,6 +1,6 @@
 {
 	"name": "doubleedesign/doublee-tinymce",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Customised configuration and plugins for WordPress/ClassicPress websites by Double-E Design.",
 	"type": "wordpress-plugin",
 	"authors": [
@@ -11,8 +11,8 @@
 	],
 	"autoload": {
 		"classmap": [
-			"src/Miniblocks/",
-			"src/Miniblocks/**/",
+			"src/Miniblocks",
+			"src/Miniblocks/**",
 			"tests/"
 		],
 		"psr-4": {
