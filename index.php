@@ -2,11 +2,11 @@
 /**
  * Plugin Name: Double-E TinyMCE
  * Description: Customised configuration and plugins for WordPress/ClassicPress websites by Double-E Design.
- * Requires PHP: 8.3
+ * Requires PHP: 8.4
  * Author: Double-E Design
  * Plugin URI: https://github.com/doubleedesign/doublee-tinymce
  * Author URI: https://www.doubleedesign.com.au
- * Version: 0.0.1
+ * Version: 1.0.0
  * Text domain: doublee-tinymce
  */
 
