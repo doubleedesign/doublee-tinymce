@@ -36,11 +36,12 @@ Insert a blockquote with a citation.
 ![miniblock-pullquote.png](docs/miniblock-pullquote.png)
 
 #### Button group[^1]
-Insert a group of themed button-style links.
+Insert a group of themed button-style links. If you are using [Comet Components](https://cometcomponents.io), the buttons will be generated using the `Button` component logic and template (including theme override, if applicable) present at the time of insertion[^2].
 
 ![miniblock-buttongroup.png](docs/miniblock-buttongroup.png)
 
 [^1]: This miniblock requires [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/) to be installed and active, as it leverages some of its UI components for the editing form. I may look at removing this dependency in future, but I do not have a timeline for it.
+[^2]: Because TinyMCE fields store content as plain HTML, if changes are made to the button logic or rendering template they will not be automatically reflected in existing button groups. You would need to edit and re-save each button group to update them.
 
 ### Tables
 

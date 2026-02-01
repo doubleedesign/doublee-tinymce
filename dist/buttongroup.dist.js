@@ -226,14 +226,13 @@
 						const links = plugin.processRepeaterRows(response.data.acf_button_group_repeater_key);
 						const colorTheme = event.data.colorTheme || '';
 						const hAlign = event.data.hAlign || '';
-						const htmlString = plugin.generateHtmlToInsert(links, colorTheme, hAlign);
-
-						if (existingNode) {
-							editor.dom.setOuterHTML(existingNode, htmlString);
-						}
-						else {
-							editor.insertContent(htmlString + '<p></p>');
-						}
+						plugin.generateHtmlToInsert(links, colorTheme, hAlign).then((htmlString) => {
+							if (existingNode) {
+								editor.dom.setOuterHTML(existingNode, htmlString);
+							} else {
+								editor.insertContent(htmlString + '<p></p>');
+							}
+						});
 					},
 					onClose: function () {
 					}
@@ -365,8 +364,7 @@
 			}).get();
 		}
 
-		// TODO: Could maybe do this as an AJAX call to use Comet Button to generate HTML if available
-		generateHtmlToInsert(links, colorTheme, hAlign) {
+		async generateHtmlToInsert(links, colorTheme, hAlign) {
 			let html = document.createElement('div');
 			html.className = 'button-group';
 			html.setAttribute('contenteditable', 'false');
@@ -377,21 +375,41 @@
 			if (hAlign) {
 				html.setAttribute('data-halign', hAlign);
 			}
-			links.forEach(item => {
-				const link = document.createElement('a');
-				link.className = 'button';
-				link.setAttribute('href', item.url);
-				link.textContent = item?.label ?? 'Untitled link';
-				if (link.target) {
-					link.setAttribute('target', item.target);
-				}
-				if (item.style && item.style !== 'default') {
-					link.setAttribute('data-style', item.style);
-				}
-				html.appendChild(link);
+
+			const responses = await Promise.all(
+				links.map(item => this.generateButtonHtml(item))
+			);
+
+			responses.forEach(response => {
+				const buttonHtml = response?.data?.html ?? '';
+				html.insertAdjacentHTML('beforeend', buttonHtml);
 			});
 
 			return html.outerHTML;
+		}
+
+		generateButtonHtml(linkData) {
+			return jQuery.ajax({
+				url: doublee_tinymce.ajaxUrl,
+				type: 'POST',
+				data: {
+					headers: {
+						'Content-Type': 'application/json',
+						'X-Requested-With': 'XMLHttpRequest'
+					},
+					// This action name must match the PHP action hook, without the wp_ajax_ prefix
+					action: 'generate_button_html',
+					nonce: doublee_tinymce.nonce,
+					body: JSON.stringify(linkData)
+				},
+				success: function (response) {
+					return response.data.html;
+				},
+				error: function (error) {
+					console.error(error);
+					alert('There was an error generating the button HTML.');
+				}
+			});
 		}
 	}
 

@@ -14,7 +14,8 @@ class ButtonGroupPlugin extends MiniblockPlugin {
         parent::__construct('buttongroup');
         add_action('wp_ajax_get_button_group_modal_content', [$this, 'get_button_group_modal_content']);
         add_action('admin_head', 'acf_form_head');
-        add_filter('the_content', [$this, 'filter_out_miniblock_attributes_when_rendering_html'], 20);
+
+	    add_action('wp_ajax_generate_button_html', [$this, 'generate_button_html']);
     }
 
     /**
@@ -170,4 +171,56 @@ class ButtonGroupPlugin extends MiniblockPlugin {
         // Fall back to returning the current timestamp if random_bytes fails
         return (string)time();
     }
+
+
+	public function generate_button_html(): void {
+		if (!wp_verify_nonce($_POST['nonce'], 'doublee_tinymce_ajax_nonce')) {
+			wp_die('Security check failed');
+		}
+
+		try {
+			$data = json_decode(stripslashes($_POST['body']), true);
+
+			if(class_exists('Doubleedesign\Comet\Core\Button')) {
+				$button = new \Doubleedesign\Comet\Core\Button([
+					'href' => $data['url'] ?? '#',
+					'isOutline' => isset($data['style']) && $data['style'] === 'outline',
+					'target' => isset($data['target']) && $data['target'] === '_blank' ? '_blank' : '',
+				],$data['label'] ?? 'Untitled Button');
+
+				ob_start();
+				$button->render();
+				$html = ob_get_clean();
+			}
+			else if(class_exists('DOMElement' && class_exists('DOMDocument'))) {
+				$button = new \DOMElement('a');
+				$button->setAttribute('class', 'button');
+				$button->setAttribute('href', $data['url'] ?? '#');
+				if(isset($data['style']) && $data['style'] === 'outline') {
+					$button->setAttribute('data-style', 'outline');
+				}
+				if(isset($data['target']) && $data['target'] === '_blank') {
+					$button->setAttribute('target', '_blank');
+				}
+				$button->nodeValue = $data['label'] ?? 'Untitled Button';
+
+				$tempDoc = new \DOMDocument();
+				$importedButton = $tempDoc->importNode($button, true);
+				$tempDoc->appendChild($importedButton);
+				$html = $tempDoc->saveHTML($importedButton);
+			}
+			else {
+				throw new \Exception('Unable to generate button HTML: required PHP classes are missing.');
+			}
+
+			wp_send_json_success(array(
+				'html' => trim($html)
+			));
+		}
+		catch (\Exception $e) {
+			wp_send_json_error(array(
+				'message' => $e->getMessage(),
+			));
+		}
+	}
 }
