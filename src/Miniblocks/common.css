@@ -179,6 +179,95 @@
   justify-content: unset !important;
 }
 
+.mce-doublee-custom-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem !important;
+  height: 2rem;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+.mce-doublee-custom-icon svg {
+  display: block;
+  height: 2rem;
+  padding: 0;
+}
+.mce-doublee-custom-icon svg path {
+  transition: all 0.2s ease-in-out;
+  fill: rgb(117, 117, 117);
+}
+.mce-menu-item:has(.mce-doublee-custom-icon) {
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  width: fit-content !important;
+  padding: 2px;
+  margin: 0;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  font-size: 0;
+}
+.mce-menu-item:has(.mce-doublee-custom-icon) .mce-ico {
+  display: none;
+}
+.mce-menu-item:has(.mce-doublee-custom-icon).mce-active {
+  background: transparent !important;
+}
+
+.mce-menu-item.mce-active .mce-doublee-custom-icon, .mce-btn .mce-doublee-custom-icon {
+  background: rgb(30, 30, 30);
+}
+.mce-menu-item.mce-active .mce-doublee-custom-icon svg path, .mce-btn .mce-doublee-custom-icon svg path {
+  fill: white;
+}
+
+.mce-listbox {
+  min-height: 40px;
+}
+.mce-listbox button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.mce-listbox button:has(.mce-doublee-custom-icon) .mce-ico {
+  display: none;
+}
+
+.mce-menu-has-icons:has(.mce-halign-field__option) {
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+.mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  border: 1px solid #CCC;
+  padding: 2px;
+  width: fit-content;
+}
+.mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] .mce-menu-item .mce-text {
+  display: block;
+  font-size: 0.75rem;
+  position: absolute;
+  z-index: 10;
+  background: rgb(30, 30, 30);
+  color: white;
+  padding: 0.25rem;
+  opacity: 0;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease;
+}
+.mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] .mce-menu-item:hover, .mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] .mce-menu-item:focus, .mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] .mce-menu-item:active {
+  background: #EEE;
+}
+.mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] .mce-menu-item:hover .mce-text, .mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] .mce-menu-item:focus .mce-text, .mce-menu-has-icons:has(.mce-halign-field__option) [role=menu] .mce-menu-item:active .mce-text {
+  opacity: 1;
+}
+
 .mce-container-body:has(#button-group-form-container) {
   background: white;
   min-height: 300px !important;

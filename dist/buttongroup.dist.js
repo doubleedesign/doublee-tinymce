@@ -25,6 +25,91 @@
 				]
 			};
 		}
+
+		createHAlignSelector(selectedValue) {
+			let icon = 'align-start';
+			if(selectedValue === 'center') {
+				icon = 'align-center';
+			}
+			else if(selectedValue === 'end') {
+				icon = 'align-end';
+			}
+
+			return {
+				type: 'listbox',
+				name: 'hAlign',
+				label: 'Horizontal alignment',
+				icon: icon,
+				value: selectedValue || 'start',
+				classes: 'halign-field',
+				onClick: (event) => {
+					this.insertHAlignIcons();
+					this.updateCurrentHAlignIcon(event);
+				},
+				values: [
+					{ text: 'Start', value: 'start', icon: 'align-start', classes: 'halign-field__option halign-field__option--start' },
+					{ text: 'Middle', value: 'center', icon: 'align-center', classes: 'halign-field__option halign-field__option--center', },
+					{ text: 'End', value: 'end', icon: 'align-end', classes: 'halign-field__option halign-field__option--end' }
+				]
+			};
+		}
+
+		// Insert SVG icon of the currently selected value into the hAlign selector button
+		insertCurrentHAlignIcon(event) {
+			const icon = event?.target.$el[0].querySelector('.mce-halign-field button .mce-ico');
+			if(icon) {
+				this.insertCustomIcon(icon);
+			}
+		}
+
+		updateCurrentHAlignIcon(event) {
+			const hAlignTriggerIcon = document.querySelector('.mce-halign-field button .mce-ico');
+			const clickedOptionIcon = event?.target?.closest('.mce-menu-item')?.querySelector('.mce-ico');
+			if(hAlignTriggerIcon && clickedOptionIcon) {
+				const hAlignTrigger = hAlignTriggerIcon.parentElement;
+				// Insert corresponding TinyMCE native icon element, and remove the old one
+				hAlignTriggerIcon.insertAdjacentHTML('afterend', clickedOptionIcon.cloneNode().outerHTML);
+				hAlignTriggerIcon.remove();
+
+				// Remove the old SVG
+				hAlignTrigger.querySelector('.mce-doublee-custom-icon')?.remove();
+
+				// Insert the new SVG according to the newly-inserted TinyMCE icon
+				this.insertCustomIcon(hAlignTrigger.querySelector('.mce-ico'));
+			}
+		}
+
+		// Insert SVG icons into the hAlign selector menu
+		insertHAlignIcons() {
+			setTimeout(() => {
+				const hAlignIcons = document.querySelectorAll('.mce-halign-field__option .mce-ico');
+				const iconsAlreadyInserted = document.querySelectorAll('.mce-halign-field__option .mce-doublee-custom-icon');
+				if(iconsAlreadyInserted.length > 0) {
+					return;
+				}
+
+				hAlignIcons.forEach(icon => {
+					this.insertCustomIcon(icon);
+				});
+			}, 100);
+		}
+
+		insertCustomIcon(mceIconToAttachTo) {
+			let iconHtml = null;
+			if(mceIconToAttachTo.classList.contains('mce-i-align-start')) {
+				iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 9v6h11V9H9zM4 20h1.5V4H4v16z"/></svg>';
+			}
+			else if(mceIconToAttachTo.classList.contains('mce-i-align-center')) {
+				iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.5 15v5H11v-5H4V9h7V4h1.5v5h7v6h-7Z"/></svg>';
+			}
+			else if(mceIconToAttachTo.classList.contains('mce-i-align-end')) {
+				iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 15h11V9H4v6zM18.5 4v16H20V4h-1.5z"/></svg>';
+			}
+
+			if(iconHtml) {
+				mceIconToAttachTo.insertAdjacentHTML('afterend', '<span class="mce-doublee-custom-icon">' + iconHtml + '</span>');
+			}
+		}
 	}
 
 	/* global acf */
@@ -61,7 +146,8 @@
 					}));
 					const data = {
 						links: links,
-						colorTheme: buttonGroupNode.getAttribute('data-color-theme') || ''
+						colorTheme: buttonGroupNode.getAttribute('data-color-theme') || '',
+						hAlign: buttonGroupNode.getAttribute('data-halign') || ''
 					};
 					plugin.openModal(editor, data, buttonGroupNode);
 				}
@@ -79,7 +165,7 @@
 		openModal(editor, existingData = {}, existingNode = null) {
 
 			const plugin = this;
-			const data = existingData || { links: [], colorTheme: '' };
+			const data = existingData || { links: [], colorTheme: '', hAlign: '' };
 
 			this.getRepeaterFieldHtml().then((response) => {
 				if (!response.success || !response?.data?.form_html || !response?.data?.acf_button_group_repeater_key) {
@@ -95,12 +181,17 @@
 							label: 'Links',
 							html: '<div id="button-group-form-container"></div>'
 						},
-						this.createColorThemeSelector(data.colorTheme)
+						plugin.createColorThemeSelector(data.colorTheme),
+						plugin.createHAlignSelector(data.hAlign)
 					],
-					onsubmit: function (e) {
+					onOpen: function (event) {
+						plugin.insertCurrentHAlignIcon(event);
+					},
+					onSubmit: function (event) {
 						const links = plugin.processRepeaterRows(response.data.acf_button_group_repeater_key);
-						const colorTheme = e.data.colorTheme || '';
-						const htmlString = plugin.generateHtmlToInsert(links, colorTheme);
+						const colorTheme = event.data.colorTheme || '';
+						const hAlign = event.data.hAlign || '';
+						const htmlString = plugin.generateHtmlToInsert(links, colorTheme, hAlign);
 
 						if (existingNode) {
 							editor.dom.setOuterHTML(existingNode, htmlString);
@@ -110,7 +201,6 @@
 						}
 					},
 					onClose: function () {
-
 					}
 				}, {});
 
@@ -240,7 +330,8 @@
 			}).get();
 		}
 
-		generateHtmlToInsert(links, colorTheme) {
+		// TODO: Could maybe do this as an AJAX call to use Comet Button to generate HTML if available
+		generateHtmlToInsert(links, colorTheme, hAlign) {
 			let html = document.createElement('div');
 			html.className = 'button-group';
 			html.setAttribute('contenteditable', 'false');
@@ -248,11 +339,14 @@
 			if (colorTheme) {
 				html.setAttribute('data-color-theme', colorTheme);
 			}
+			if (hAlign) {
+				html.setAttribute('data-halign', hAlign);
+			}
 			links.forEach(item => {
 				const link = document.createElement('a');
 				link.className = 'button';
 				link.setAttribute('href', item.url);
-				link.textContent = item.label;
+				link.textContent = item?.label ?? 'Untitled link';
 				if (link.target) {
 					link.setAttribute('target', item.target);
 				}

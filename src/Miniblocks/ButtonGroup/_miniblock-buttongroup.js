@@ -33,7 +33,8 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 				}));
 				const data = {
 					links: links,
-					colorTheme: buttonGroupNode.getAttribute('data-color-theme') || ''
+					colorTheme: buttonGroupNode.getAttribute('data-color-theme') || '',
+					hAlign: buttonGroupNode.getAttribute('data-halign') || ''
 				};
 				plugin.openModal(editor, data, buttonGroupNode);
 			}
@@ -51,7 +52,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 	openModal(editor, existingData = {}, existingNode = null) {
 
 		const plugin = this;
-		const data = existingData || { links: [], colorTheme: '' };
+		const data = existingData || { links: [], colorTheme: '', hAlign: '' };
 
 		this.getRepeaterFieldHtml().then((response) => {
 			if (!response.success || !response?.data?.form_html || !response?.data?.acf_button_group_repeater_key) {
@@ -67,12 +68,17 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 						label: 'Links',
 						html: '<div id="button-group-form-container"></div>'
 					},
-					this.createColorThemeSelector(data.colorTheme)
+					plugin.createColorThemeSelector(data.colorTheme),
+					plugin.createHAlignSelector(data.hAlign)
 				],
-				onsubmit: function (e) {
+				onOpen: function (event) {
+					plugin.insertCurrentHAlignIcon(event);
+				},
+				onSubmit: function (event) {
 					const links = plugin.processRepeaterRows(response.data.acf_button_group_repeater_key);
-					const colorTheme = e.data.colorTheme || '';
-					const htmlString = plugin.generateHtmlToInsert(links, colorTheme);
+					const colorTheme = event.data.colorTheme || '';
+					const hAlign = event.data.hAlign || '';
+					const htmlString = plugin.generateHtmlToInsert(links, colorTheme, hAlign);
 
 					if (existingNode) {
 						editor.dom.setOuterHTML(existingNode, htmlString);
@@ -82,7 +88,6 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 					}
 				},
 				onClose: function () {
-
 				}
 			}, {});
 
@@ -212,7 +217,8 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 		}).get();
 	}
 
-	generateHtmlToInsert(links, colorTheme) {
+	// TODO: Could maybe do this as an AJAX call to use Comet Button to generate HTML if available
+	generateHtmlToInsert(links, colorTheme, hAlign) {
 		let html = document.createElement('div');
 		html.className = 'button-group';
 		html.setAttribute('contenteditable', 'false');
@@ -220,11 +226,14 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 		if (colorTheme) {
 			html.setAttribute('data-color-theme', colorTheme);
 		}
+		if (hAlign) {
+			html.setAttribute('data-halign', hAlign);
+		}
 		links.forEach(item => {
 			const link = document.createElement('a');
 			link.className = 'button';
 			link.setAttribute('href', item.url);
-			link.textContent = item.label;
+			link.textContent = item?.label ?? 'Untitled link';
 			if (link.target) {
 				link.setAttribute('target', item.target);
 			}

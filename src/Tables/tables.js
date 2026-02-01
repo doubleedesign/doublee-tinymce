@@ -19,7 +19,6 @@ tinymce.activeEditor.on('NodeChange', function ({ element, parents }) {
 
 // Hackily remove some unwanted settings that can't be configured away without modifying the TinyMCE plugin source code
 tinymce.activeEditor.on('OpenWindow', function ({ win }) {
-	console.log(win);
 	if (win?.features?.title === 'Table properties') {
 		removeElementByLabelText(win.$el[0], 'Height');
 	}

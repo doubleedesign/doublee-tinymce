@@ -115,6 +115,117 @@ $swatchSize: 1.75rem;
 	}
 }
 
+// Custom icons added in TinyMCE modals by our JS code
+.mce-doublee-custom-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 3rem !important;
+	height: 2rem;
+	border-radius: 2px;
+	box-sizing: border-box;
+
+	svg {
+		display: block;
+		height: 2rem;
+		padding: 0;
+
+		path {
+			transition: all 0.2s ease-in-out;
+			fill: rgb(117, 117, 117);
+		}
+	}
+
+	@at-root .mce-menu-item:has(&) {
+		display: flex;
+		justify-content: center;
+		border-radius: 2px;
+		width: fit-content !important;
+		padding: 2px;
+		margin: 0;
+		transition: all 0.2s ease-in-out;
+		position: relative;
+		font-size: 0; // hide empty whitespace that affects width
+
+		.mce-ico {
+			display: none;
+		}
+
+		&.mce-active {
+			background: transparent !important;
+		}
+	}
+
+	.mce-menu-item.mce-active &,
+	.mce-btn & {
+		background: rgb(30, 30, 30);
+
+		svg {
+			path {
+				fill: white;
+			}
+		}
+	}
+}
+
+// Custom listboxes in modals - initial menu component
+.mce-listbox {
+	min-height: 40px;
+
+	button {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+
+		&:has(.mce-doublee-custom-icon) {
+			.mce-ico {
+				display: none;
+			}
+		}
+	}
+}
+
+// Custom listboxes in modals with icons - dropdown menu
+.mce-menu-has-icons:has(.mce-halign-field__option) {
+	padding: 0;
+	margin: 0;
+	overflow: visible; // for the tooltips
+
+	[role="menu"] {
+		display: flex;
+		flex-direction: row;
+		gap: 2px;
+		border: 1px solid #CCC;
+		padding: 2px;
+		width: fit-content;
+
+		.mce-menu-item {
+			.mce-text {
+				display: block;
+				font-size: 0.75rem;
+				position: absolute;
+				z-index: 10;
+				background: rgb(30, 30, 30);
+				color: white;
+				padding: 0.25rem;
+				opacity: 0;
+				top: 100%;
+				left: 50%;
+				transform: translateX(-50%);
+				transition: opacity 0.2s ease;
+			}
+
+			&:hover, &:focus, &:active {
+				background: #EEE;
+
+				.mce-text {
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+
 .mce-container-body:has(#button-group-form-container) {
 	background: white;
 	min-height: 300px !important;
