@@ -12,7 +12,8 @@
 	"autoload": {
 		"classmap": [
 			"src/Miniblocks",
-			"src/Miniblocks/**"
+			"src/Miniblocks/**",
+			"tests/"
 		],
 		"psr-4": {
 			"Doubleedesign\\DoubleeTinymce\\": [
@@ -22,11 +23,24 @@
 				"src/Miniblocks/Callout",
 				"src/Miniblocks/Pullquote",
 				"src/Tables"
+			],
+			"Doubleedesign\\DoubleeTinymce\\Tests\\": [
+				"tests/"
 			]
 		}
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
+	"require-dev": {
+		"pestphp/pest": "^4.2",
+		"brain/monkey": "^2.6",
+		"sirbrillig/spies": "^1.10"
+	},
+	"config": {
+		"allow-plugins": {
+			"pestphp/pest-plugin": true
+		}
+	},
 	"require": {
 		"ext-dom": "*",
 		"ext-libxml": "*"

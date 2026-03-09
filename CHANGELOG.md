@@ -1,5 +1,10 @@
 # Double-E TinyMCE Changelog
 
+## Version 1.0.1
+Date: 9 March 2026
+
+- Fix: Separate dev Composer config to fix install issues in Composer-managed sites.
+
 ## Version 1.0.0
 Date: 1 February 2026
 
