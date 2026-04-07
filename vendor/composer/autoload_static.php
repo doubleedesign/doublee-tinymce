@@ -29,8 +29,17 @@ class ComposerStaticInit60bc664c6cceaf504572837609986cc7
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doubleedesign\\DoubleeTinymce\\ButtonGroupPlugin' => __DIR__ . '/../..' . '/src/Miniblocks/ButtonGroup/ButtonGroupPlugin.php',
         'Doubleedesign\\DoubleeTinymce\\CalloutPlugin' => __DIR__ . '/../..' . '/src/Miniblocks/Callout/CalloutPlugin.php',
+        'Doubleedesign\\DoubleeTinymce\\EditorUI' => __DIR__ . '/../..' . '/src/EditorUI.php',
         'Doubleedesign\\DoubleeTinymce\\MiniblockPlugin' => __DIR__ . '/../..' . '/src/Miniblocks/MiniblockPlugin.php',
+        'Doubleedesign\\DoubleeTinymce\\Miniblocks' => __DIR__ . '/../..' . '/src/Miniblocks.php',
+        'Doubleedesign\\DoubleeTinymce\\PluginEntrypoint' => __DIR__ . '/../..' . '/src/PluginEntrypoint.php',
         'Doubleedesign\\DoubleeTinymce\\PullquotePlugin' => __DIR__ . '/../..' . '/src/Miniblocks/Pullquote/PullquotePlugin.php',
+        'Doubleedesign\\DoubleeTinymce\\Styleselect' => __DIR__ . '/../..' . '/src/Styleselect.php',
+        'Doubleedesign\\DoubleeTinymce\\Tables' => __DIR__ . '/../..' . '/src/Tables/Tables.php',
+        'Doubleedesign\\DoubleeTinymce\\Toolbar' => __DIR__ . '/../..' . '/src/Toolbar.php',
+        'Doubleedesign\\DoubleeTinymce\\ToolbarUtils' => __DIR__ . '/../..' . '/src/ToolbarUtils.php',
+        'Doubleedesign\\DoubleeTinymce\\Toolbars' => __DIR__ . '/../..' . '/src/Toolbars.php',
+        'Doubleedesign\\DoubleeTinymce\\Utils' => __DIR__ . '/../..' . '/src/Utils.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

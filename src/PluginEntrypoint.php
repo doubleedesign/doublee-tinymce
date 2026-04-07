@@ -6,10 +6,10 @@ class PluginEntrypoint {
 
     public function __construct() {
         new Styleselect();
-        new Toolbars();
-        new EditorUI();
-        new Tables();
-        new Miniblocks();
+		new Toolbars();
+		new EditorUI();
+		new Tables();
+		new Miniblocks();
     }
 
     public static function get_version(): string {

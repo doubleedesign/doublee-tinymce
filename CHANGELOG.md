@@ -1,5 +1,10 @@
 # Double-E TinyMCE Changelog
 
+## Version 1.0.2
+Date: 7 April 2026
+
+- Fix: Handle script blocks (e.g., those used by Ninja Forms) when filtering `the_content`.
+
 ## Version 1.0.1
 Date: 9 March 2026
 
