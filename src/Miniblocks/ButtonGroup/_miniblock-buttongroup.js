@@ -56,7 +56,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 
 		const data = {
 			links: existingData?.links ?? [],
-			colorTheme:  existingData?.colorTheme ?? defaults?.colorTheme ?? '',
+			colorTheme: existingData?.colorTheme ?? defaults?.colorTheme ?? '',
 			hAlign: existingData?.hAlign ?? defaults?.hAlign ?? 'start'
 		};
 
@@ -104,8 +104,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 			if (container) {
 				container.innerHTML = response.data.form_html;
 				acf.doAction('ready', jQuery(container));
-			}
-			else {
+			} else {
 				throw new Error('Failed to find container for button group form fields in modal');
 			}
 
@@ -137,8 +136,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 			success: function (response) {
 				if (response.data.html) {
 					return response.data.html;
-				}
-				else {
+				} else {
 					return '<div>Failed to load form fields.</div>';
 				}
 			},
@@ -210,7 +208,7 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 
 		return repeaterField.$rows().map(function () {
 			const $row = jQuery(this);
-			const rowFields = acf.getFields({ parent: $row });
+			const rowFields = acf.getFields({parent: $row});
 
 			const linkField = rowFields.find(field => field.get('name') === 'link');
 			const styleField = rowFields.find(field => field.get('name') === 'style');
