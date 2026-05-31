@@ -166,6 +166,12 @@
   margin: 0 !important;
   position: relative;
   transition: background 0.3s, border-color 0.3s;
+  font-size: 0 !important;
+  border-radius: 1.75rem;
+  border: 2px solid transparent !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  justify-content: center;
 }
 .mce-color-theme-field__swatch:before {
   content: "";
@@ -195,14 +201,6 @@
   font-family: var(--fa-style-family-classic);
   font-size: 1rem;
   font-weight: 700;
-}
-.mce-color-theme-field__swatch {
-  font-size: 0 !important;
-  border-radius: 1.75rem;
-  border: 2px solid transparent !important;
-  width: fit-content !important;
-  height: fit-content !important;
-  justify-content: center;
 }
 .mce-color-theme-field__swatch--primary:before {
   background-color: var(--color-primary);
