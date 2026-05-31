@@ -13,8 +13,8 @@ abstract class MiniblockPlugin {
         $this->name = $name;
         add_filter('mce_external_plugins', [$this, 'register_plugin'], 1, 1);
         add_filter('mce_buttons_2', [$this, 'register_button'], 5);
-        add_filter('the_content', [$this, 'filter_out_miniblock_attributes_when_rendering_html'], 20);
 	    add_filter('tiny_mce_before_init', [$this, 'keep_spans_in_generated_html']);
+        add_filter('the_content', [$this, 'filter_out_miniblock_attributes_when_rendering_html'], 20);
     }
 
     public function register_plugin(array $plugins): array {
@@ -41,6 +41,20 @@ abstract class MiniblockPlugin {
      * @return string
      */
     public function filter_out_miniblock_attributes_when_rendering_html($content): string {
+	    // Extract <script> blocks before DOM parsing so they aren't mangled.
+	    // Ninja Forms (and similar plugins) use <script type="text/html"> templates
+	    // that DOMDocument will corrupt.
+	    $script_placeholders = [];
+	    $content = preg_replace_callback(
+		    '#<script[\s\S]*?</script>#i',
+		    function ($matches) use (&$script_placeholders) {
+			    $placeholder = '%%SCRIPT_BLOCK_' . count($script_placeholders) . '%%';
+			    $script_placeholders[$placeholder] = $matches[0];
+			    return $placeholder;
+		    },
+		    $content
+	    );
+
         $attributes = ['contenteditable', 'data-quote', 'data-citation', 'data-content'];
         $dom = new DOMDocument();
         @$dom->loadHTML('<?xml encoding="UTF-8">' . $content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR);
@@ -53,6 +67,13 @@ abstract class MiniblockPlugin {
         }
 
         $output = $dom->saveHTML();
+
+	    // Restore the original script blocks
+	    $output = str_replace(
+		    array_keys($script_placeholders),
+		    array_values($script_placeholders),
+		    $output
+	    );
 
         return str_replace('<?xml encoding="UTF-8">', '', $output);
     }

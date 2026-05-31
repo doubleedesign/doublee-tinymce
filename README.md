@@ -125,6 +125,15 @@ npm run build
 
 ### PHP
 
+Use `composer.dev.json` in development environments like so:
+
+```powershell
+$env:COMPOSER = "composer.dev.json"; composer install
+```
+```powershell
+$env:COMPOSER = "composer.dev.json"; composer update
+```
+
 When adding PHP classes, if they are in subdirectories you will need to add them to `composer.json` to use the namespace that ignores directories.
 
 After adding any new class, run:

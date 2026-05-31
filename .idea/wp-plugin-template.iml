@@ -8,7 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Miniblocks/Callout" isTestSource="false" packagePrefix="Doubleedesign\DoubleeTinymce\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Miniblocks/Pullquote" isTestSource="false" packagePrefix="Doubleedesign\DoubleeTinymce\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Tables" isTestSource="false" packagePrefix="Doubleedesign\DoubleeTinymce\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="false" packagePrefix="Doubleedesign\DoubleeTinymce\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brain/monkey" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brianium/paratest" />

@@ -2,14 +2,14 @@
 namespace Doubleedesign\DoubleeTinymce;
 
 class PluginEntrypoint {
-    private static string $version = '0.0.1';
+    private static string $version = '1.0.1';
 
     public function __construct() {
         new Styleselect();
-        new Toolbars();
-        new EditorUI();
-        new Tables();
-        new Miniblocks();
+		new Toolbars();
+		new EditorUI();
+		new Tables();
+		new Miniblocks();
     }
 
     public static function get_version(): string {

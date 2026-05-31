@@ -6,7 +6,7 @@
  * Author: Double-E Design
  * Plugin URI: https://github.com/doubleedesign/doublee-tinymce
  * Author URI: https://www.doubleedesign.com.au
- * Version: 1.0.0
+ * Version: 1.0.2
  * Text domain: doublee-tinymce
  */
 
