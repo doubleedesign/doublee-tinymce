@@ -18,5 +18,18 @@
 		&:has(.mce-btn[aria-label^="Undo"]):not(:only-child) {
 			margin-inline-start: auto;
 		}
+
+		.mce-btn.mce-active {
+			background: #50575e !important;
+			color: contrast-color(#50575e) !important;
+		}
+	}
+}
+
+.mce-notification {
+	z-index: 100001 !important;
+
+	body.modal-open & {
+
 	}
 }

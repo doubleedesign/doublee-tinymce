@@ -53,9 +53,24 @@ $swatchSize: 1.75rem;
 	left: calc(50dvw - 300px) !important;
 }
 
+.mce-toolbar-grp,
+.mce-floatpanel {
+	.mce-btn, .mce-txt {
+		font-family: system-ui !important;
+	}
+
+	button {
+		font-family: inherit !important;
+	}
+}
+
 .mce-doublee-miniblock-modal {
 	height: fit-content !important;
 	min-width: 700px !important;
+
+	* {
+		font-family: system-ui !important;
+	}
 
 	.mce-window-head,
 	.mce-window-body,
@@ -152,7 +167,8 @@ $swatchSize: 1.75rem;
 					width: 100% !important;
 					height: auto !important;
 				}
-			};
+			}
+		;
 		}
 	}
 
@@ -186,7 +202,6 @@ $swatchSize: 1.75rem;
 		}
 	}
 }
-
 
 // Custom icons added in TinyMCE modals by our JS code
 .mce-doublee-custom-icon {
@@ -267,6 +282,8 @@ $swatchSize: 1.75rem;
 		}
 
 		&--inherit {
+			line-height: 1 !important;
+
 			&:before {
 				background-color: transparent;
 				content: '\f05e';

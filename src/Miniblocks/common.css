@@ -3,9 +3,22 @@
   left: calc(50dvw - 300px) !important;
 }
 
+.mce-toolbar-grp .mce-btn, .mce-toolbar-grp .mce-txt,
+.mce-floatpanel .mce-btn,
+.mce-floatpanel .mce-txt {
+  font-family: system-ui !important;
+}
+.mce-toolbar-grp button,
+.mce-floatpanel button {
+  font-family: inherit !important;
+}
+
 .mce-doublee-miniblock-modal {
   height: fit-content !important;
   min-width: 700px !important;
+}
+.mce-doublee-miniblock-modal * {
+  font-family: system-ui !important;
 }
 .mce-doublee-miniblock-modal .mce-window-head,
 .mce-doublee-miniblock-modal .mce-window-body,
@@ -263,6 +276,9 @@
 }
 .mce-color-theme-field__swatch--white:after {
   color: var(--readable-color-white);
+}
+.mce-color-theme-field__swatch--inherit {
+  line-height: 1 !important;
 }
 .mce-color-theme-field__swatch--inherit:before {
   background-color: transparent;
