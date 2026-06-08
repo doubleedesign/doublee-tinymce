@@ -7,7 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Doubleedesign\\DoubleeTinymce\\' => array($baseDir . '/src', $baseDir . '/src/Miniblocks', $baseDir . '/src/Miniblocks/ButtonGroup', $baseDir . '/src/Miniblocks/Callout', $baseDir . '/src/Miniblocks/Pullquote', $baseDir . '/src/Tables'),
-    'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/src'),
-    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
-    'Brain\\Monkey\\' => array($vendorDir . '/brain/monkey/src'),
 );

@@ -191,6 +191,8 @@ class ButtonGroupPlugin extends MiniblockPlugin {
 				ob_start();
 				$button->render();
 				$html = ob_get_clean();
+				// Strip tabs, returns, and newlines so we don't get unwanted line breaks
+				$html = str_replace(array("\n", "\r", "\t"), '', $html);
 			}
 			else if(class_exists('DOMElement' && class_exists('DOMDocument'))) {
 				$button = new \DOMElement('a');

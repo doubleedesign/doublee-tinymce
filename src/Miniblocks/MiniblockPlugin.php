@@ -13,7 +13,7 @@ abstract class MiniblockPlugin {
         $this->name = $name;
         add_filter('mce_external_plugins', [$this, 'register_plugin'], 1, 1);
         add_filter('mce_buttons_2', [$this, 'register_button'], 5);
-	    add_filter('tiny_mce_before_init', [$this, 'keep_spans_in_generated_html']);
+	    add_filter('tiny_mce_before_init', [$this, 'keep_spans_in_generated_html'], 20);
         add_filter('the_content', [$this, 'filter_out_miniblock_attributes_when_rendering_html'], 20);
     }
 
@@ -78,7 +78,7 @@ abstract class MiniblockPlugin {
         return str_replace('<?xml encoding="UTF-8">', '', $output);
     }
 
-	public function keep_spans_in_generated_html($tinymce_settings) {
+	public function keep_spans_in_generated_html($settings): array {
 		$existing = $settings['extended_valid_elements'] ?? '';
 		$settings['extended_valid_elements'] = $existing
 			? $existing . ',span,span[*]'

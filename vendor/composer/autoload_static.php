@@ -6,36 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit60bc664c6cceaf504572837609986cc7
 {
-    public static $files = array (
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-        '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
-        'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
-        'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
-        'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
-        'aadac1114cab8dc19489a7f6dc24c003' => __DIR__ . '/..' . '/pestphp/pest-plugin-arch/src/Autoload.php',
-        '051bafe20e2674435a162870efa2d2a7' => __DIR__ . '/..' . '/brain/monkey/inc/api.php',
-        'f83ed111c2f97a0449abf067f157f418' => __DIR__ . '/..' . '/pestphp/pest/src/Functions.php',
-        '7d2876738dc0328edeb8a103c76cd8e7' => __DIR__ . '/..' . '/pestphp/pest/src/Pest.php',
-        '87bdbb51288b85ed9730e08db9b18a06' => __DIR__ . '/..' . '/sirbrillig/spies/src/Spies/functions.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'D' =>
         array (
             'Doubleedesign\\DoubleeTinymce\\' => 29,
-            'Doctrine\\Deprecations\\' => 22,
-            'DeepCopy\\' => 9,
-        ),
-        'B' =>
-        array (
-            'Brain\\Monkey\\' => 13,
         ),
     );
 
@@ -49,45 +23,14 @@ class ComposerStaticInit60bc664c6cceaf504572837609986cc7
             4 => __DIR__ . '/../..' . '/src/Miniblocks/Pullquote',
             5 => __DIR__ . '/../..' . '/src/Tables',
         ),
-        'Doctrine\\Deprecations\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
-        ),
-        'DeepCopy\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
-        ),
-        'Brain\\Monkey\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/brain/monkey/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'S' =>
-        array (
-            'Spies' =>
-            array (
-                0 => __DIR__ . '/..' . '/sirbrillig/spies/src',
-            ),
-        ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doubleedesign\\DoubleeTinymce\\ButtonGroupPlugin' => __DIR__ . '/../..' . '/src/Miniblocks/ButtonGroup/ButtonGroupPlugin.php',
         'Doubleedesign\\DoubleeTinymce\\CalloutPlugin' => __DIR__ . '/../..' . '/src/Miniblocks/Callout/CalloutPlugin.php',
-        'Doubleedesign\\DoubleeTinymce\\EditorUI' => __DIR__ . '/../..' . '/src/EditorUI.php',
         'Doubleedesign\\DoubleeTinymce\\MiniblockPlugin' => __DIR__ . '/../..' . '/src/Miniblocks/MiniblockPlugin.php',
-        'Doubleedesign\\DoubleeTinymce\\Miniblocks' => __DIR__ . '/../..' . '/src/Miniblocks.php',
-        'Doubleedesign\\DoubleeTinymce\\PluginEntrypoint' => __DIR__ . '/../..' . '/src/PluginEntrypoint.php',
         'Doubleedesign\\DoubleeTinymce\\PullquotePlugin' => __DIR__ . '/../..' . '/src/Miniblocks/Pullquote/PullquotePlugin.php',
-        'Doubleedesign\\DoubleeTinymce\\Styleselect' => __DIR__ . '/../..' . '/src/Styleselect.php',
-        'Doubleedesign\\DoubleeTinymce\\Tables' => __DIR__ . '/../..' . '/src/Tables/Tables.php',
-        'Doubleedesign\\DoubleeTinymce\\Toolbar' => __DIR__ . '/../..' . '/src/Toolbar.php',
-        'Doubleedesign\\DoubleeTinymce\\ToolbarUtils' => __DIR__ . '/../..' . '/src/ToolbarUtils.php',
-        'Doubleedesign\\DoubleeTinymce\\Toolbars' => __DIR__ . '/../..' . '/src/Toolbars.php',
-        'Doubleedesign\\DoubleeTinymce\\Utils' => __DIR__ . '/../..' . '/src/Utils.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -95,7 +38,6 @@ class ComposerStaticInit60bc664c6cceaf504572837609986cc7
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit60bc664c6cceaf504572837609986cc7::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit60bc664c6cceaf504572837609986cc7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit60bc664c6cceaf504572837609986cc7::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit60bc664c6cceaf504572837609986cc7::$classMap;
 
         }, null, ClassLoader::class);

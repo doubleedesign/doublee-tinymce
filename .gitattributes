@@ -7,3 +7,13 @@
 /.gitignore          export-ignore
 phpunit.xml          export-ignore
 pint.json            export-ignore
+composer.dev.json	 export-ignore
+composer.lock        export-ignore
+README.md            export-ignore
+CHANGELOG.md         export-ignore
+/docs				 export-ignore
+eslint.config.js     export-ignore
+rollup.config.js	 export-ignore
+package.json		 export-ignore
+package-lock.json	 export-ignore
+pnpm-lock.json	 	 export-ignore
