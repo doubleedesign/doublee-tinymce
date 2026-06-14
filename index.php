@@ -6,24 +6,22 @@
  * Author: Double-E Design
  * Plugin URI: https://github.com/doubleedesign/doublee-tinymce
  * Author URI: https://www.doubleedesign.com.au
- * Version: 1.0.2
+ * Version: 1.1.0
  * Text domain: doublee-tinymce
  */
 
 include __DIR__ . '/vendor/autoload.php';
 use Doubleedesign\DoubleeTinymce\PluginEntrypoint;
 
-new PluginEntrypoint();
+$is_mu_plugin = false;
+if(function_exists('wp_get_mu_plugins')) {
+	$is_mu_plugin = array_find(wp_get_mu_plugins(), function($plugin) {
+		return str_contains($plugin, 'doublee-tinymce');
+	});
+}
+if (!defined('DOUBLEE_TINYMCE_PLUGIN_URL')) {
+	$pluginsPath = $is_mu_plugin ? 'mu-plugins' : 'plugins';
+	define('DOUBLEE_TINYMCE_PLUGIN_URL', get_site_url() . "/wp-content/$pluginsPath/doublee-tinymce/src");
+}
 
-function activate_doublee_tinymce(): void {
-	PluginEntrypoint::activate();
-}
-function deactivate_doublee_tinymce(): void {
-	PluginEntrypoint::deactivate();
-}
-function uninstall_doublee_tinymce(): void {
-	PluginEntrypoint::uninstall();
-}
-register_activation_hook(__FILE__, 'activate_doublee_tinymce');
-register_deactivation_hook(__FILE__, 'deactivate_doublee_tinymce');
-register_uninstall_hook(__FILE__, 'uninstall_doublee_tinymce');
+new PluginEntrypoint();

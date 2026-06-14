@@ -2,7 +2,7 @@
 namespace Doubleedesign\DoubleeTinymce;
 
 class PluginEntrypoint {
-    private static string $version = '1.0.1';
+    private static string $version = '1.1.0';
 
     public function __construct() {
         new Styleselect();
@@ -14,17 +14,5 @@ class PluginEntrypoint {
 
     public static function get_version(): string {
         return self::$version;
-    }
-
-    public static function activate() {
-        // Activation logic here
-    }
-
-    public static function deactivate() {
-        // Deactivation logic here
-    }
-
-    public static function uninstall() {
-        // Uninstallation logic here
     }
 }

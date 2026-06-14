@@ -18,8 +18,8 @@ abstract class MiniblockPlugin {
     }
 
     public function register_plugin(array $plugins): array {
-        $currentDir = plugin_dir_url(__FILE__);
-        $pluginDir = dirname($currentDir, 2);
+        $pluginDir = DOUBLEE_TINYMCE_PLUGIN_URL;
+		$pluginDir = str_replace('/src', '', $pluginDir);
 
         $plugins["doublee_miniblocks_{$this->name}"] = $pluginDir . '/dist/' . $this->name . '.dist.js';
 

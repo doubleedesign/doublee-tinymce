@@ -14,9 +14,8 @@ class Miniblocks {
     }
 
     public function register_miniblocks_shared_admin_css(): void {
-        $currentDir = plugin_dir_url(__FILE__);
-        $pluginDir = dirname($currentDir, 1);
-        wp_enqueue_style('comet-miniblocks-admin-css', $pluginDir . '/src/Miniblocks/common.css', array(), null);
+        $pluginDir = DOUBLEE_TINYMCE_PLUGIN_URL;
+        wp_enqueue_style('comet-miniblocks-admin-css', $pluginDir . '/Miniblocks/common.css', array(), null);
     }
 
     public function make_data_available_to_tinymce_js(): void {

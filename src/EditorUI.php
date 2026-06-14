@@ -10,9 +10,11 @@ class EditorUI {
     }
 
     public function enqueue_tinymce_ui_styles(): void {
+		$pluginDir = DOUBLEE_TINYMCE_PLUGIN_URL;
+
         wp_enqueue_style(
             'doublee-tinymce-editor-ui',
-            plugins_url('src/editor-ui.css', dirname(__FILE__)),
+	        DOUBLEE_TINYMCE_PLUGIN_URL . '/editor-ui.css',
             array(),
             PluginEntrypoint::get_version()
         );
