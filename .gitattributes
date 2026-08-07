@@ -17,3 +17,6 @@ rollup.config.js	 export-ignore
 package.json		 export-ignore
 package-lock.json	 export-ignore
 pnpm-lock.json	 	 export-ignore
+dist/** linguist-generated
+vendor/** linguist-vendored
+docs/** linguist-documentation
